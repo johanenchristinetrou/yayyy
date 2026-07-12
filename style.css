@@ -303,6 +303,73 @@ h2 {
   margin-bottom: 40px;
 }
 
+
+
+
+/* ------------------------------
+   Countdown
+--------------------------------*/
+
+.countdown-wrapper{
+    margin:40px 0;
+}
+
+.countdown-divider{
+    width:60px;
+    height:1px;
+    background:rgba(255,255,255,.35);
+    margin:20px auto;
+}
+
+.countdown-label{
+    font-size:.85rem;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    opacity:.8;
+    margin-bottom:18px;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.count-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.count-item span{
+    font-family:'Playfair Display',serif;
+    font-size:1.35rem;
+    font-weight:600;
+    line-height:1;
+    display:inline-block;
+
+    width:3ch;
+
+    text-align:center;
+
+}
+
+.count-item small{
+    margin-top:6px;
+    font-size:.60rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    opacity:.8;
+}
+
+.count-separator{
+    font-size:1.5rem;
+    opacity:.45;
+}
+
+
 /* ==========================================================================
    6. ONS VERHAAL, DETAILS & GESKENKE SUBSISTEME
    ========================================================================== */
@@ -420,33 +487,7 @@ h2 {
   color: var(--accent);
   font-weight: 600;
 }
-/*
-.bank-details-clean {
-  background-color: rgba(255,255,255,0.4);
-  border-left: 2px solid var(--accent);
-  padding: 20px 25px;
-  margin-top: 30px;
-}
 
-.bank-details-clean strong {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  margin-bottom: 10px;
-}
-
-.bank-details-clean p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: 3px;
-}
-
-.bank-details-clean .ref {
-  color: var(--text);
-  font-weight: 500;
-  margin-top: 8px;
-}
-  */
 
 /* ==========================================================================
    7. VERBLYF & INFO (NUWE GEKONDENSEERDE STYLE)
@@ -456,6 +497,15 @@ h2 {
   color: var(--text-muted);
   margin-bottom: 40px;
   font-weight: 300;
+}
+
+.condensed-list a {
+    color: inherit; /* Keeps the text color the same as it is now */
+    text-decoration: underline; /* Adds an underline so guests know it's clickable */
+}
+
+.condensed-list a:hover {
+    color: var(--accent); /* Optional: changes color slightly when hovered over */
 }
 
 .condensed-list {

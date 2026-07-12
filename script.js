@@ -1,5 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+  const weddingDate = new Date("January 16, 2027 15:30:00").getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+
+    const distance = weddingDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        /(1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        /(1000 * 60)
+    );
+
+    const seconds = Math.floor(
+    (distance % (1000 * 60))
+    /1000
+    );
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+    // document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    // document.getElementById("minutes").textContent = minutes;
+    // document.getElementById("seconds").textContent = seconds;
+
+}
+
+updateCountdown();
+
+// setInterval(updateCountdown,60000);
+setInterval(updateCountdown, 1000);
+
   // ==========================================
   // 1. MOBILE MENU TOGGLE
   // ==========================================
@@ -129,3 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', checkReveal);
   checkReveal(); 
 });
+
+
+
+
+
