@@ -6,7 +6,7 @@
   --accent-light: #F4EFEA; 
   --text: #343434;         
   --text-muted: #706F6F;   
-  --background: #F4F0EB;   /* Sagte luukse sandkleur */
+  --background: #F4F0EB;   
   --card: #FFFFFF;         
   --line: #E7E3DF;         
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -75,25 +75,21 @@ h2 {
   padding: clamp(70px, 8vw, 110px) 0;
 }
 
-/* Deursigtige prent agtergrond op ligte afdelings */
 .section.light {
   background: linear-gradient(rgba(250, 249, 248, 0.88), rgba(250, 249, 248, 0.88)), 
-              url("CJ.jpg") center/cover no-repeat fixed;
+              url("zzbackground.jpg") center/cover no-repeat fixed;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-/* Maak die Waar & Wanneer afdeling se agtergrond spierwit */
 #details.section.light {
   background: #FFFFFF !important;
 }
 
-/* Maak seker die boks met die prent is weer 100% helder */
 #details .split-image {
   opacity: 1 !important;
 }
 
-/* Buttons */
 .map-button, .big-button, .hero-button, .nav-button {
   display: inline-block;
   text-decoration: none;
@@ -130,7 +126,7 @@ h2 {
 }
 
 /* ==========================================================================
-   3. ASYMMETRIC SPLIT LAYOUT (ALTERNATIEF REGS / LINKS)
+   3. ASYMMETRIC SPLIT LAYOUT
    ========================================================================== */
 .split-layout {
   display: grid;
@@ -166,8 +162,44 @@ h2 {
   object-fit: cover;
 }
 
+
+
+
+
+
+
+/* 
+ ==========================================================================
+   ONS VERHAAL SPECIFIC IMAGE FIX (Overrides global split-image styles)
+   ========================================================================== 
+#story .split-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#story .image-wrapper {
+  width: 100%;
+  max-width: 450px; /* Limits max width so it doesn't overpower the text 
+  height: auto;     /* Lets container height expand naturally 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#story .image-wrapper img {
+  width: 100%;
+  height: auto;        /* Preserves natural aspect ratio 
+  max-height: 520px;   /* Prevents portrait photos from stretching too long 
+  object-fit: contain; /* Displays full image without cropping any edges 
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+} */
+
 /* ==========================================================================
-   4. NAVIGATION (GLASS EFFECT)
+   4. NAVIGATION
    ========================================================================== */
 .navbar {
   position: fixed;
@@ -254,7 +286,7 @@ h2 {
   position: relative;
   height: 100vh;
   width: 100%;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url("CJ.jpg") center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url("zzbackground2.jpg") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,33 +315,6 @@ h2 {
   font-weight: 300;
 }
 
-.hero-divider {
-  width: 50px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.6);
-  margin: 0 auto 25px auto;
-}
-
-.hero-date {
-  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-  letter-spacing: 0.15em;
-  margin-bottom: 5px;
-}
-
-.hero-location {
-  font-weight: 300;
-  font-size: 0.9rem;
-  opacity: 0.85;
-  margin-bottom: 40px;
-}
-
-
-
-
-/* ------------------------------
-   Countdown
---------------------------------*/
-
 .countdown-wrapper{
     margin:40px 0;
 }
@@ -319,14 +324,6 @@ h2 {
     height:1px;
     background:rgba(255,255,255,.35);
     margin:20px auto;
-}
-
-.countdown-label{
-    font-size:.85rem;
-    letter-spacing:.35em;
-    text-transform:uppercase;
-    opacity:.8;
-    margin-bottom:18px;
 }
 
 .countdown{
@@ -349,11 +346,8 @@ h2 {
     font-weight:600;
     line-height:1;
     display:inline-block;
-
     width:3ch;
-
     text-align:center;
-
 }
 
 .count-item small{
@@ -369,9 +363,8 @@ h2 {
     opacity:.45;
 }
 
-
 /* ==========================================================================
-   6. ONS VERHAAL, DETAILS & GESKENKE SUBSISTEME
+   6. DETAILS & STORY
    ========================================================================== */
 .story-text, .gift-text, .rsvp-text {
   font-size: 1.05rem;
@@ -384,30 +377,28 @@ h2 {
   color: var(--accent);
 }
 
-/* Waar en Wanneer Compact Rûe */
-/* Waar en Wanneer Compact Rûe */
 .details-compact {
   display: flex;
   flex-direction: column;
   gap: 25px;
   margin-top: 20px;
-  max-width: 450px; /* Hou dit netjies bymekaar op groter/halwe skerms */
+  max-width: 450px;
   margin-left: 0;
 }
 
 .compact-row {
   display: flex;
-  align-items: flex-start; /* Belyn ikoon bo-aan die eerste lyn teks */
+  align-items: flex-start;
   gap: 15px;
-  text-align: left; /* Dwing teks om altyd links te belyn, selfs op selfone */
+  text-align: left;
 }
 
 .line-art-small {
   width: 24px;
   height: 24px;
   color: var(--accent);
-  flex-shrink: 0; /* Verhoed dat die ikoon platgedruk word op klein skerms */
-  margin-top: 2px; /* Skuif ikoon微klein bietjie af om perfek met die 'strong' lyn te belyn */
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .compact-content {
@@ -431,16 +422,14 @@ h2 {
   line-height: 1.4;
 }
 
-/* Skoon Bankbesonderhede */
-/* Skoon Bankbesonderhede */
 .bank-details-clean {
   background-color: rgba(255, 255, 255, 0.5);
   border-left: 3px solid var(--accent);
   padding: 25px;
   margin-top: 30px;
-  max-width: 450px; /* Verhoed dat dit te breed strek op skootrekenaars */
+  max-width: 450px;
   border-radius: 0 6px 6px 0;
-  text-align: left; /* Dwing die hele boks om links te belyn, selfs op selfone */
+  text-align: left;
 }
 
 .bank-details-clean strong {
@@ -464,11 +453,10 @@ h2 {
   line-height: 1.4;
 }
 
-/* Sien om na die perfekte vertikale belyning */
 .bank-row .label {
   color: var(--text-muted);
-  width: 140px; /* Dwing elke 'label' om presies ewe breed te wees */
-  flex-shrink: 0; /* Verhoed dat die selfoon dit platdruk */
+  width: 140px;
+  flex-shrink: 0;
 }
 
 .bank-row .value {
@@ -476,7 +464,6 @@ h2 {
   font-weight: 500;
 }
 
-/* Maak die verwysingsry effens meer prominent */
 .bank-row.ref-row {
   margin-top: 5px;
   padding-top: 5px;
@@ -488,70 +475,7 @@ h2 {
   font-weight: 600;
 }
 
-
-/* ==========================================================================
-   7. VERBLYF & INFO (NUWE GEKONDENSEERDE STYLE)
-   ========================================================================== */
-.stay-intro {
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 40px;
-  font-weight: 300;
-}
-
-.condensed-list a {
-    color: inherit; /* Keeps the text color the same as it is now */
-    text-decoration: underline; /* Adds an underline so guests know it's clickable */
-}
-
-.condensed-list a:hover {
-    color: var(--accent); /* Optional: changes color slightly when hovered over */
-}
-
-.condensed-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px 40px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 30px 0;
-}
-
-.condensed-list li {
-  position: relative;
-  padding-left: 20px;
-  font-size: 0.95rem;
-}
-
-.condensed-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-size: 1.2rem;
-  top: -2px;
-}
-
-.condensed-list li span {
-  color: var(--text);
-}
-
-.condensed-list li strong {
-  font-weight: 500;
-}
-
-.stay-note {
-  margin-top: 30px;
-  background-color: var(--card);
-  padding: 25px;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 0.95rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-}
-
-/* Clean Line-by-Line Info List */
+/* BELANGRIKE INLIGTING (CLEAN INFO LIST) */
 .info-list-clean {
   list-style: none;
   display: flex;
@@ -585,58 +509,201 @@ h2 {
 }
 
 /* ==========================================================================
-   8. FOTOS (CAROUSEL)
+   7. VERBLYF - MINIMALIST TILES
    ========================================================================== */
-.carousel-container {
+.stay-intro {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  font-weight: 300;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.accommodation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stay-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--card);
+  padding: 24px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stay-card h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.stay-card .stay-distance {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.stay-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 25px rgba(138, 107, 88, 0.12);
+}
+
+/* .stay-note {
+  margin-top: 30px;
+  background-color: var(--card);
+  padding: 25px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.95rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+  border: 1px solid var(--line);
+} */
+
+
+
+
+
+/* ==========================================================================
+   8. GALLERY - ELEGANT PHOTO ROLL / DECK (NO CLONES, NO FLICKER)
+   ========================================================================== */
+.deck-carousel-wrapper {
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  max-height: 600px;
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  border-radius: 12px;
 }
 
 .carousel-track {
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .carousel-slide {
-  min-width: 100%;
-  aspect-ratio: 16 / 9;
-}
-
-.carousel-slide img {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 20%; /* Centers 60% wide slide */
+  width: 60%;
   height: 100%;
-  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0) scale(0.85);
 }
 
+/* Center Active Slide */
+.carousel-slide[data-pos="0"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+  z-index: 10;
+}
+
+/* Left Peek (Previous) */
+.carousel-slide[data-pos="-1"] {
+  opacity: 0.45;
+  transform: translateX(-70%) scale(0.88);
+  z-index: 5;
+}
+
+/* Right Peek (Next) */
+.carousel-slide[data-pos="1"] {
+  opacity: 0.45;
+  transform: translateX(70%) scale(0.88);
+  z-index: 5;
+}
+
+/* NO CROPPING: handle both portrait and landscape fully */
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--line);
+  background-color: var(--card);
+}
+
+/* Buttons & Indicators */
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  width: 45px;
-  height: 45px;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  color: var(--text);
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  transition: var(--transition);
+  z-index: 20;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-.carousel-btn.prev { left: 20px; }
-.carousel-btn.next { right: 20px; }
+.carousel-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text);
+}
 
-.carousel-nav {
+.carousel-btn:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-btn:hover svg {
+  stroke: #ffffff;
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+/* .carousel-nav {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .carousel-indicator {
@@ -646,16 +713,26 @@ h2 {
   background-color: var(--line);
   border: none;
   cursor: pointer;
+  transition: var(--transition);
 }
 
 .carousel-indicator.active {
   background-color: var(--accent);
   width: 24px;
-  border-radius: 4px;
+  border-radius: 6px;
+} */
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    left: 10%;
+    width: 80%;
+  }
 }
 
+
+
 /* ==========================================================================
-   9. FOOTER
+   9. FOOTER (BIBLE VERSE)
    ========================================================================== */
 footer {
   background-color: #262423;
@@ -670,16 +747,6 @@ footer .quote {
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto 20px auto;
-}
-
-footer .names {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-}
-
-footer .date {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
 }
 
 /* ==========================================================================
@@ -697,7 +764,7 @@ footer .date {
 }
 
 /* ==========================================================================
-   11. RESPONSIVENESS (MOBILE ACCORDION/STACKING)
+   11. RESPONSIVENESS
    ========================================================================== */
 @media (max-width: 992px) {
   .split-layout, .split-layout.reverse {
@@ -706,7 +773,7 @@ footer .date {
   }
   
   .split-layout.reverse .split-image {
-    grid-row: 2; /* Skuif foto onder die teks op selfone vir logiese leesvloei */
+    grid-row: 2;
   }
 
   .split-text, .split-text h2 {
@@ -717,10 +784,40 @@ footer .date {
     margin: 0 auto 30px auto;
   }
 
-  .condensed-list {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  /* Force 2 tiles per row on mobile phones */
+  .accommodation-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
+
+  .stay-card {
+    padding: 18px 10px;
+  }
+
+  .stay-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .stay-card .stay-distance {
+    font-size: 0.78rem;
+  }
+
+  .carousel-container {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .carousel-slide {
+    padding: 12px;
+  }
+
+  .carousel-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
 
   .info-list-clean li {
     grid-template-columns: 1fr;
@@ -750,4 +847,3 @@ footer .date {
     transform: translateX(0);
   }
 }
-

@@ -1,45 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
+  // ==========================================
+  // COUNTDOWN TIMER
+  // ==========================================
   const weddingDate = new Date("January 16, 2027 15:30:00").getTime();
 
-function updateCountdown(){
-
+  function updateCountdown() {
     const now = new Date().getTime();
-
     const distance = weddingDate - now;
 
+    if (distance < 0) {
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
+      return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24))
-        /(1000 * 60 * 60)
-    );
-
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60))
-        /(1000 * 60)
-    );
-
-    const seconds = Math.floor(
-    (distance % (1000 * 60))
-    /1000
-    );
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     document.getElementById("days").textContent = days;
     document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-    // document.getElementById("hours").textContent = hours;
     document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
     document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-    // document.getElementById("minutes").textContent = minutes;
-    // document.getElementById("seconds").textContent = seconds;
+  }
 
-}
-
-updateCountdown();
-
-// setInterval(updateCountdown,60000);
-setInterval(updateCountdown, 1000);
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
   // ==========================================
   // 1. MOBILE MENU TOGGLE
@@ -52,12 +42,9 @@ setInterval(updateCountdown, 1000);
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('open');
       navLinks.classList.toggle('open');
-      
-      // Verhoed dat die agtergrond skrol wanneer menu oop is
       document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Maak toe sodra 'n skakel geklik word
     navItems.forEach(item => {
       item.addEventListener('click', () => {
         menuToggle.classList.remove('open');
@@ -67,75 +54,34 @@ setInterval(updateCountdown, 1000);
     });
   }
 
-  // ==========================================
-  // 2. AUTOMATIC ENGAGEMENT PHOTOS CAROUSEL
-  // ==========================================
-  const track = document.querySelector('.carousel-track');
-  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-  const nextButton = document.querySelector('.carousel-btn.next');
-  const prevButton = document.querySelector('.carousel-btn.prev');
-  const navDotContainer = document.querySelector('.carousel-nav');
 
-  if (track && slides.length > 0) {
-    let currentIndex = 0;
+  // ==========================================
+  // 2. STATE-BASED DECK CAROUSEL (NO INDICATORS)
+  // ==========================================
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+
+  if (slides.length > 0) {
+    let activeIndex = 0;
     let autoSlideInterval;
 
-    // Genereer die navigasie-kolletjies (indicators) dinamies
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.classList.add('carousel-indicator');
-      if (index === 0) dot.classList.add('active');
-      dot.setAttribute('aria-label', `Sien foto ${index + 1}`);
-      navDotContainer.appendChild(dot);
-    });
+    function updateCarousel(index) {
+      // Loop modulo math
+      activeIndex = (index + slides.length) % slides.length;
 
-    const dots = Array.from(navDotContainer.querySelectorAll('.carousel-indicator'));
+      slides.forEach((slide, i) => {
+        let offset = i - activeIndex;
+        if (offset < -1 && offset < -Math.floor(slides.length / 2)) offset += slides.length;
+        if (offset > 1 && offset > Math.floor(slides.length / 2)) offset -= slides.length;
 
-    // Move to specific slide function
-    const updateCarousel = (index) => {
-      track.style.transform = `translateX(-${index * 100}%)`;
-      
-      // Update active dot
-      dots.forEach(dot => dot.classList.remove('active'));
-      dots[index].classList.add('active');
-      
-      currentIndex = index;
-    };
-
-    // Next Slide
-    const nextSlide = () => {
-      let nextIndex = currentIndex + 1;
-      if (nextIndex >= slides.length) nextIndex = 0;
-      updateCarousel(nextIndex);
-    };
-
-    // Prev Slide
-    const prevSlide = () => {
-      let prevIndex = currentIndex - 1;
-      if (prevIndex < 0) prevIndex = slides.length - 1;
-      updateCarousel(prevIndex);
-    };
-
-    // Event Listeners vir knoppies
-    nextButton.addEventListener('click', () => {
-      nextSlide();
-      resetAutoSlide();
-    });
-
-    prevButton.addEventListener('click', () => {
-      prevSlide();
-      resetAutoSlide();
-    });
-
-    // Klik aksies vir die kolletjies self
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        updateCarousel(index);
-        resetAutoSlide();
+        slide.setAttribute('data-pos', offset);
       });
-    });
+    }
 
-    // Outomatiese blaai (elke 4 sekondes)
+    const nextSlide = () => updateCarousel(activeIndex + 1);
+    const prevSlide = () => updateCarousel(activeIndex - 1);
+
     const startAutoSlide = () => {
       autoSlideInterval = setInterval(nextSlide, 4000);
     };
@@ -145,9 +91,87 @@ setInterval(updateCountdown, 1000);
       startAutoSlide();
     };
 
-    // Begin die outomatiese loop
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+
+    // Initialize
+    updateCarousel(0);
     startAutoSlide();
   }
+
+// // ==========================================
+//   // 2. STATE-BASED DECK CAROUSEL (ZERO FLICKER)
+//   // ==========================================
+//   const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+//   const nextBtn = document.getElementById('nextBtn');
+//   const prevBtn = document.getElementById('prevBtn');
+//   const indicators = Array.from(document.querySelectorAll('.carousel-indicator'));
+
+//   if (slides.length > 0) {
+//     let activeIndex = 0;
+//     let autoSlideInterval;
+
+//     function updateCarousel(index) {
+//       // Modulo math for mathematical infinite looping
+//       activeIndex = (index + slides.length) % slides.length;
+
+//       slides.forEach((slide, i) => {
+//         // Calculate shortest relative offset around the loop
+//         let offset = i - activeIndex;
+//         if (offset < -1 && offset < -Math.floor(slides.length / 2)) offset += slides.length;
+//         if (offset > 1 && offset > Math.floor(slides.length / 2)) offset -= slides.length;
+
+//         // Assign position state
+//         slide.setAttribute('data-pos', offset);
+//       });
+
+//       // Update dot indicators
+//       indicators.forEach((dot, i) => {
+//         dot.classList.toggle('active', i === activeIndex);
+//       });
+//     }
+
+//     const nextSlide = () => updateCarousel(activeIndex + 1);
+//     const prevSlide = () => updateCarousel(activeIndex - 1);
+
+//     const startAutoSlide = () => {
+//       autoSlideInterval = setInterval(nextSlide, 4000);
+//     };
+
+//     const resetAutoSlide = () => {
+//       clearInterval(autoSlideInterval);
+//       startAutoSlide();
+//     };
+
+//     nextBtn?.addEventListener('click', () => {
+//       nextSlide();
+//       resetAutoSlide();
+//     });
+
+//     prevBtn?.addEventListener('click', () => {
+//       prevSlide();
+//       resetAutoSlide();
+//     });
+
+//     indicators.forEach((indicator, i) => {
+//       indicator.addEventListener('click', () => {
+//         updateCarousel(i);
+//         resetAutoSlide();
+//       });
+//     });
+
+//     // Initialize
+//     updateCarousel(0);
+//     startAutoSlide();
+//   }
+
 
   // ==========================================
   // 3. SMOOTH SCROLL REVEAL ANIMATION
@@ -155,23 +179,16 @@ setInterval(updateCountdown, 1000);
   const revealElements = document.querySelectorAll('.reveal');
 
   const checkReveal = () => {
-    const triggerBottom = window.innerHeight * 0.85; // Animeer as item 15% van onder af verskyn
+    const triggerBottom = window.innerHeight * 0.85;
 
     revealElements.forEach(el => {
       const elTop = el.getBoundingClientRect().top;
-
       if (elTop < triggerBottom) {
         el.classList.add('active');
       }
     });
   };
 
-  // Hardloop een keer by die begin en dan met elke skrol
   window.addEventListener('scroll', checkReveal);
   checkReveal(); 
 });
-
-
-
-
-
