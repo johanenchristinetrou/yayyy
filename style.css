@@ -163,41 +163,6 @@ h2 {
 }
 
 
-
-
-
-
-
-/* 
- ==========================================================================
-   ONS VERHAAL SPECIFIC IMAGE FIX (Overrides global split-image styles)
-   ========================================================================== 
-#story .split-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-#story .image-wrapper {
-  width: 100%;
-  max-width: 450px; /* Limits max width so it doesn't overpower the text 
-  height: auto;     /* Lets container height expand naturally 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#story .image-wrapper img {
-  width: 100%;
-  height: auto;        /* Preserves natural aspect ratio 
-  max-height: 520px;   /* Prevents portrait photos from stretching too long 
-  object-fit: contain; /* Displays full image without cropping any edges 
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--line);
-} */
-
 /* ==========================================================================
    4. NAVIGATION
    ========================================================================== */
@@ -563,18 +528,11 @@ h2 {
   box-shadow: 0 10px 25px rgba(138, 107, 88, 0.12);
 }
 
-/* .stay-note {
-  margin-top: 30px;
-  background-color: var(--card);
-  padding: 25px;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 0.95rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-  border: 1px solid var(--line);
-} */
 
-
+.rsvp-text strong {
+  color: var(--accent);
+  font-weight: 700;
+}
 
 
 
@@ -734,7 +692,7 @@ h2 {
 /* ==========================================================================
    9. FOOTER (BIBLE VERSE)
    ========================================================================== */
-footer {
+/* footer {
   background-color: #262423;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
@@ -747,7 +705,62 @@ footer .quote {
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto 20px auto;
+} */
+
+/* 
+.footer-text {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  line-height: 1.4;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;  Prevents text from spreading too wide on desktop 
 }
+
+/* Keeps the break active so it stays 2 lines on desktop and mobile
+.footer-break {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .footer-text {
+    font-size: 0.8rem; /* Slightly smaller text for narrow mobile screens
+  }
+} */
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+footer {
+  background-color: #262423;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+footer .quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem); /* Dynamic sizing */
+  line-height: 1.4;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Keeps the break active so it stays 2 lines on desktop and mobile */
+.footer-break {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  footer .quote {
+    font-size: 0.85rem; /* Slightly smaller for mobile */
+  }
+}
+
+
+
+
+
 
 /* ==========================================================================
    10. SCROLL ANIMATIONS
